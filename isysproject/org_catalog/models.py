@@ -6,14 +6,13 @@ class Address (models.Model):
     composit_adr = models. CharField(max_length = 200, verbose_name = "Составной Адрес вида (404112, Краснодарский край, Еланский район, Крымковское с.п., ул. Орджоникидзе, стр. 27, оф.544) ")
     short_adr = models.CharField(max_length = 30, blank = True, verbose_name ="Короткий адрес вида (Краснода.Еланский)")
     region = models.CharField(max_length = 30, verbose_name ="Субъект РФ")
-    city = models.CharField(max_length = 30, verbose_name = "Город")
+    city = models.CharField(max_length = 30, blank = True, null = True, verbose_name = "Город")
     district = models.CharField(max_length = 30, verbose_name ="Район")
     settlement = models.CharField(max_length = 30, verbose_name ="Поселение")
     street = models.CharField(max_length = 30, verbose_name ="Улица")
     structure = models.CharField(max_length = 30, verbose_name ="Строение(Дом)")
     post_index = models.CharField(max_length = 6, verbose_name ="Почтовый индекс")
     address_type = models.CharField(max_length = 30, choices = ((1,"Фактический"),(2,"Юридический"),(3,"Почтовый")), verbose_name = "Тип адреса")
-
     class Meta:
         verbose_name = "Адрес"
         verbose_name_plural = "Адреса"
@@ -74,3 +73,5 @@ class Organization(models.Model):
     class Meta:
         verbose_name = "Организация"
         verbose_name_plural = "Организации"
+    def __unicode__(self):
+        return self.short_org_name
