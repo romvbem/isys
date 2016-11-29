@@ -30,31 +30,46 @@ class Organization(models.Model):
     e_mail = models.ForeignKey(Email, verbose_name = "Адрес электронной почты")
     site = models.URLField(verbose_name = "Адрес действующего интернет сайта")
     note = models.Charfield(verbose_name = "Примечание (комментарии, переговоры)")
-    contact_person
+    contact_person = models.ManyToManyField(Person, verbose_name = "Контактное лицо")
     class Meta:
         verbose_name = "Организация"
         verbose_name_plural = "Организации"
 
 
 class Address (models.Model):
-    short_adress
-    region
-    district
-    settlement
-    street
-    structure
-    index
+    composit_adr = madels. Charfield(max_lenght = 200, verbose_name = "Составной Адрес вида (404112, Краснодарский край, Еланский район, Крымковское с.п., ул. Орджоникидзе, стр. 27, оф.544) ")
+    short_adr = models.Charfield(max_lenght = 30, blank = True, verbose_name ="Короткий адрес вида (Краснода.Еланский)")
+    region = models.Charfield(max_lenght = 30, verbose_name ="Субъект РФ")
+    city = models.Charfield(max_lenght = 30, verbose_name = "Город")
+    district = models.Charfield(max_lenght = 30, verbose_name ="Район")
+    settlement = models.Charfield(max_lenght = 30, verbose_name ="Поселение")
+    street = models.Charfield(max_lenght = 30, verbose_name ="Улица")
+    structure = models.Charfield(max_lenght = 30, verbose_name ="Строение(Дом)")
+    post_index = models.Charfield(max_lenght = 6, verbose_name ="Почтовый индекс")
+    class Meta:
+        verbose_name = "Адрес"
+        verbose_name_plural = "Адреса"
 
 class Phone_number (models.Model):
     number = models.IntegerField(max_lenght = 10, verbose_name = "Номер телефона")
     note = models.Charfield(max_lenght = 150, verbose_name = " Примечание")
+    class Meta:
+        verbose_name = "Номер телефона"
+        verbose_name_plural = "Номера телефонов"
                  
 class Email (models.Model):
     name = models.EmailField(verbose_name = "Email")
     email_type = models.Charfield(max_lenght = 20, choises = ((1,"Основной"),(2,"Второстепенный")), verbose_name = "Тип электронного адреса")
+    class Meta:
+        verbose_name = "Адрес электронной почты"
+        verbose_name_plural = "Адреса электронной почты"
 
 class Person (models.Model)
-    name = models.Charfield(max_lenght = 30, verbose_name = "")
-    middle_name
-    surname
-    mnemo_person_name
+    name = models.Charfield(max_lenght = 30, verbose_name = "Имя")
+    middle_name = models.Charfield(max_lenght = 30, verbose_name = "Отчество")
+    surname = models.Charfield(max_lenght = 30, verbose_name = "Фамилия")
+    mnemo_person_name = models.Charfield(max_lenght = 100, verbose_name = "Мнемокод имени вида (Сергей Сергеевич С.)")
+    note = models.Charfield(max_lenght = 150, verbose_name = " Примечание")
+    class Meta:
+        verbose_name = "Контактное лицо"
+        verbose_name_plural = "Контактные лица"
